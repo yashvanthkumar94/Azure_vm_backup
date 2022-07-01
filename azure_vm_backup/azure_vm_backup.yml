@@ -1,0 +1,20 @@
+- hosts: localhost
+  connection: local
+  vars:
+    resource_group: "RG-NoNPrd"
+    #vm_name: "vmtestwin4"
+    recovery_vault_name: "RG-NoNPrd-Vault"
+    backup_policy_name: "AZ-Windows"
+    
+  tasks:  
+  
+  - name: Enabling/Updating protection for the Azure VM
+    azure.azcollection.azure_rm_backupazurevm:
+      resource_group: "RG-NoNPrd"
+      recovery_vault_name: "RG-NoNPrd-Vault"
+      resource_id: '/subscriptions/17bbb4b4-30f4-4cef-bf36-9d8f26ea9ff0/resourceGroups/RG-NoNPrd/providers/Microsoft.Compute/virtualMachines/vmtestwin4'
+      backup_policy_id: '/subscriptions/17bbb4b4-30f4-4cef-bf36-9d8f26ea9ff0/resourceGroups/RG-NoNPrd/providers/microsoft.recoveryservices/vaults/RG-NoNPrd-Vault/backupPolicies/AZ-Windows'
+      state: 'create'
+    #  register: enablebackupvm
+  #- debug:
+  #      var: enablebackupvm
